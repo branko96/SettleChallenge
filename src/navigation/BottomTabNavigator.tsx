@@ -8,8 +8,8 @@ const Tab = createBottomTabNavigator();
 function BottomTabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={BuySellScreen} />
-      <Tab.Screen name="Settings" component={OrdersScreen} />
+      <Tab.Screen name="Trade" component={BuySellScreen} />
+      <Tab.Screen name="Orders" component={OrdersScreen} />
     </Tab.Navigator>
   );
 }

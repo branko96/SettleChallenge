@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useContext} from 'react';
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -6,16 +6,25 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 export const OrdersContext = React.createContext({
   orders: [],
-  setOrders: (orders: any[]) => {},
+  setOrders: (item: any) => {},
 });
 
 const App = () => {
   const [orders, setOrders] = React.useState([]);
+
+  const handleSetOrders = useCallback(
+    item => {
+      const newOrders = [...orders, item];
+      setOrders(newOrders);
+    },
+    [orders],
+  );
+
   return (
     <OrdersContext.Provider
       value={{
         orders,
-        setOrders,
+        setOrders: handleSetOrders,
       }}>
       <NavigationContainer>
         <Stack.Navigator>
