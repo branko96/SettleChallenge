@@ -1,41 +1,13 @@
-import React, {useCallback, useContext} from 'react';
-import BottomTabNavigator from './src/navigation/BottomTabNavigator';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-export const OrdersContext = React.createContext({
-  orders: [],
-  setOrders: (item: any) => {},
-});
+import React from 'react';
+import Toast from 'react-native-toast-message';
+import RootNavigator from './src/navigation';
 
 const App = () => {
-  const [orders, setOrders] = React.useState([]);
-
-  const handleSetOrders = useCallback(
-    item => {
-      const newOrders = [...orders, item];
-      setOrders(newOrders);
-    },
-    [orders],
-  );
-
   return (
-    <OrdersContext.Provider
-      value={{
-        orders,
-        setOrders: handleSetOrders,
-      }}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="Initial"
-            component={BottomTabNavigator}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </OrdersContext.Provider>
+    <>
+      <RootNavigator />
+      <Toast position="bottom" bottomOffset={60} />
+    </>
   );
 };
 
